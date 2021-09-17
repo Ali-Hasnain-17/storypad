@@ -6,29 +6,28 @@ async function createStory(req, res) {
   const story = new Story({ title, description, author, tags, media });
   try {
     await story.save();
-    res.status(201).json({ message: "Post Created" });
+    return res.status(201).json({ message: "Post Created" });
   } catch (e) {
-    res.status(409).json({ message: e.message });
+    return res.status(409).json({ message: e.message });
   }
 }
 
 async function getAllStories(req, res) {
   try {
     const stories = await Story.find();
-    res.json(stories);
+    return res.json(stories);
   } catch (e) {
-    res.status(400).json({ message: e.message });
+    return res.status(400).json({ message: e.message });
   }
 }
 
 async function getStoryById(req, res) {
-  const { id } = req.params.id;
+  const { id } = req.params;
   try {
     const story = await Story.findById(id);
-    res.json(story);
+    return res.json(story);
   } catch (e) {
-    res.status(400).json({ message: e.message });
-    s;
+    return res.status(400).json({ message: e.message });
   }
 }
 
